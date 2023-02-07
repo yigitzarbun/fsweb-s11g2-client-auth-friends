@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { axiosWithAuth } from "./../axiosAuth";
+
 const StyledHeader = styled.header`
   display: flex;
   justify-content: space-around;
@@ -25,6 +28,19 @@ const StyledNavLink = styled.button`
   padding: 2vh 1vw;
 `;
 export default function Header() {
+  const history = useHistory();
+
+  const handleLogout = (event) => {
+    event.preventDefault();
+    axiosWithAuth()
+      .post("http://localhost:9000/api/logout")
+      .then(() => {
+        localStorage.removeItem("token");
+        history.push("/");
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <StyledHeader>
       <StyledTitle>FRIENDS DATABASE</StyledTitle>
@@ -38,7 +54,7 @@ export default function Header() {
         <Link to="/add-friend">
           <StyledNavLink>ADD FRIEND</StyledNavLink>
         </Link>
-        <StyledNavLink>LOGOUT</StyledNavLink>
+        <StyledNavLink onClick={handleLogout}>LOGOUT</StyledNavLink>
       </StyledNavBar>
     </StyledHeader>
   );

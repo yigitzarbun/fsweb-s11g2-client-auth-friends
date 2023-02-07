@@ -38,7 +38,7 @@ export default function AddFriend() {
   const history = useHistory();
   const [newFriend, setNewFriend] = useState({
     name: "",
-    age: 0,
+    age: null,
     email: "",
   });
 
@@ -49,7 +49,7 @@ export default function AddFriend() {
       .then((res) => {
         setNewFriend({
           name: "",
-          age: 0,
+          age: null,
           email: "",
         });
         history.push("/friends-list");

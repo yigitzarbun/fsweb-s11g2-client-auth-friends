@@ -9,6 +9,7 @@ const StyledFriendsContainer = styled.div`
 `;
 const StyledFriend = styled.div`
   display: flex;
+  column-gap: 2vw;
 `;
 export default function FriendsList() {
   let [friendsList, setFriendsList] = useState([]);
@@ -20,7 +21,6 @@ export default function FriendsList() {
       })
       .catch((err) => console.log(err));
   }, []);
-
   return (
     <StyledFriendsContainer>
       <h2>FRIENDS LIST</h2>
